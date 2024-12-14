@@ -1,0 +1,1 @@
+This is a very simple Docker Compose to create a fully functioning RustyConnector cluster with 3 Minecraft servers, a single proxy, and some common utilities for modules such as Postgres and Redis. 

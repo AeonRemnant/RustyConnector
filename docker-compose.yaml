@@ -1,0 +1,129 @@
+# 
+# This prebuilds a fully capable minecraft cluster
+# 
+
+services:
+  velocity:
+    container_name: rustyconnector_velocity
+    image: itzg/bungeecord
+    ports:
+      - "25565:25577"
+    environment:
+      TYPE: VELOCITY
+      VELOCITY_CONFIG: |
+        bind: 0.0.0.0:25577
+    volumes:
+      - ${BASE_PATH}/velocity/plugins:/plugins
+      - ${BASE_PATH}/velocity/config:/config
+    depends_on:
+      - minecraft1
+      - minecraft2
+      - minecraft3
+
+  minecraft1:
+    container_name: rustyconnector_mc1
+    image: itzg/minecraft-server
+    environment:
+      EULA: "TRUE"
+      TYPE: ${MC_TYPE}
+      MEMORY: ${RAM}
+      USE_AIKAR_FLAGS: ${FLAGS}
+    ports:
+      - "25565"
+    volumes:
+      - ${BASE_PATH}/mc1/plugins:/data/plugins
+      - ${BASE_PATH}/mc1/config:/data/config
+      - ${BASE_PATH}/mc1/data:/data
+
+  minecraft2:
+    container_name: rustyconnector_mc2
+    image: itzg/minecraft-server
+    environment:
+      EULA: "TRUE"
+      TYPE: ${MC_TYPE}
+      MEMORY: ${RAM}
+      USE_AIKAR_FLAGS: ${FLAGS}
+    ports:
+      - "25566"
+    volumes:
+      - ${BASE_PATH}/mc2/plugins:/data/plugins
+      - ${BASE_PATH}/mc2/config:/data/config
+      - ${BASE_PATH}/mc2/data:/data
+
+  minecraft3:
+    container_name: rustyconnector_mc3
+    image: itzg/minecraft-server
+    environment:
+      EULA: "TRUE"
+      TYPE: ${MC_TYPE}
+      MEMORY: ${RAM}
+      USE_AIKAR_FLAGS: ${FLAGS}
+    ports:
+      - "25567"
+    volumes:
+      - ${BASE_PATH}/mc3/plugins:/data/plugins
+      - ${BASE_PATH}/mc3/config:/data/config
+      - ${BASE_PATH}/mc3/data:/data
+
+# 
+# Below here are some common tools people might like to use for module development
+# 
+
+  redis:
+    container_name: rustyconnector_redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ${BASE_PATH}/redis:/data
+
+  postgres:
+    container_name: rustyconnector_postgres
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: rustyconnector
+      POSTGRES_PASSWORD: rustyconnector
+      POSTGRES_DB: rustyconnector
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${BASE_PATH}/postgres:/var/lib/postgresql/data
+
+  mongodb:
+    container_name: rustyconnector_mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rustyconnector
+      MONGO_INITDB_ROOT_PASSWORD: rustyconnector
+      MONGO_INITDB_DATABASE: rustyconnector
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${BASE_PATH}/mongodb:/data/db
+
+  mariadb:
+    container_name: rustyconnector_mariadb
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rustyconnector
+      MYSQL_USER: rustyconnector
+      MYSQL_PASSWORD: rustyconnector
+      MYSQL_DATABASE: rustyconnector
+    ports:
+      - "3306:3306"
+    volumes:
+      - ${BASE_PATH}/mariadb:/var/lib/mysql
+
+  # scylla:
+  #   container_name: rustyconnector_scylla
+  #   image: scylladb/scylla:latest
+  #   ports:
+  #     - "9042:9042"   # CQL
+  #     - "9160:9160"   # Thrift
+  #     - "10000:10000" # REST API
+  #   volumes:
+  #     - ${BASE_PATH}/scylla:/var/lib/scylla
+  #   command:
+  #     - --developer-mode=1
+  #   environment:
+  #     - SCYLLA_LISTEN_ADDRESS=0.0.0.0
