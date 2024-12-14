@@ -114,16 +114,16 @@ services:
     volumes:
       - ${BASE_PATH}/mariadb:/var/lib/mysql
 
-  # scylla:
-  #   container_name: rustyconnector_scylla
-  #   image: scylladb/scylla:latest
-  #   ports:
-  #     - "9042:9042"   # CQL
-  #     - "9160:9160"   # Thrift
-  #     - "10000:10000" # REST API
-  #   volumes:
-  #     - ${BASE_PATH}/scylla:/var/lib/scylla
-  #   command:
-  #     - --developer-mode=1
-  #   environment:
-  #     - SCYLLA_LISTEN_ADDRESS=0.0.0.0
+  scylla:
+    container_name: rustyconnector_scylla
+    image: scylladb/scylla:latest
+    ports:
+      - "9042:9042"   # CQL
+      - "9160:9160"   # Thrift
+      - "10000:10000" # REST API
+    volumes:
+      - ${BASE_PATH}/scylla:/var/lib/scylla
+    command:
+      - --developer-mode=1
+    environment:
+      - SCYLLA_LISTEN_ADDRESS=0.0.0.0
