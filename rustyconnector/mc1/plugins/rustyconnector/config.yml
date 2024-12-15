@@ -1,0 +1,58 @@
+#
+# If you need help updating your configs from an older version;
+# take a look at our config migration docs:
+#
+# https://wiki.aelysium.group/rusty-connector/docs/updating/
+#
+version: 7
+
+#
+# The address used to connect to this server.
+# This address should match what a player would enter if they were trying to connect directly to this server.
+# Make sure you also include the port number!
+#
+# If you're in a Kubernetes or Docker environment, you can bypass this option by setting the RC_ADDRESS environment variable.
+#
+# Example: 127.0.0.1:25565
+#
+address: "minecraft1:25565"
+
+#
+# The family to register this server to.
+# Every server must be a member of a family.
+# If the server tries to register into a family that doesn't exist, the server won't register.
+#
+family: "dev"
+
+magic-link:
+    #
+    # The address for the Magic Link access point.
+    # It's not necessary to provide a slash at the end.
+    #
+    # Example: http://127.0.0.1:8080
+    #
+    access-endpoint: "http://velocity:8080"
+
+#
+# Should this server us a UUID for it's serverID instead of the family name + nano id?
+# This setting is really only necessary if you're in highly scalable environments and have
+# the infrastructure to properly handle UUIDs as server names.
+#
+# Enabling this setting is the same as setting this server's name in velocity.toml to a UUID.
+# Certain plugins aren't written to deal with server names that long and you'll have to implement
+# proper API support to display something other than server UUIDs to players.
+#
+# If you enable this, you'll need to delete `metadata/server.id` so that it can be regenerated with the new uuid.
+#
+use-uuid: false
+
+#
+# Provide additional metadata for the server
+# Metadata provided here is non-essential, meaning that RustyConnector is capable of running without anything provided here.
+# When you provide metadata here it will be sent to the proxy. Ensure that the provided metadata conforms to valid JSON syntax.
+#
+# For built-in metadata options, check the Aelysium wiki:
+# https://wiki.aelysium.group/rusty-connector/docs/concepts/metadata/
+#
+metadata: "{\"softCap\": 30, \"hardCap\": 40}"
+

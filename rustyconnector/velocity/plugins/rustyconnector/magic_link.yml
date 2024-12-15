@@ -1,0 +1,29 @@
+#
+# The address which servers will make requests to.
+# You should include the port number as well.
+#
+address: "velocity:8080"
+
+#
+# Should Magic Link utilize SSL certification for secure connections.
+# All packets shipped over Magic Link are AES 256-bit encrypted no matter what.
+# However, it's just about always best practice to use secured connections
+# especially if the connection isn't over a private network.
+# `true` - Magic Link will utilize wss and https.
+# `false` - Magic Link will utilize ws and http.
+#
+secured: false
+
+cache:
+    #
+    # The number of packets that will be saved into memory at any time.
+    # As new packets are received, old packets will get pushed out of the cache.
+    #
+    size: 100
+
+    #
+    # The packet types that shouldn't be cached.
+    # If a packet is of a type that is contained below, it will not be cached.
+    #
+    ignored-types: []
+

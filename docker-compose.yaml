@@ -1,21 +1,20 @@
-#
-# This prebuilds a fully capable minecraft cluster
-#
-
 services:
   velocity:
     container_name: rustyconnector_velocity
     image: itzg/bungeecord
     ports:
-      - 25565:25577
+      - 25577:25577
     environment:
       TYPE: VELOCITY
+      VELOCITY_VERSION: ${PROXY_VERSION}
       VELOCITY_CONFIG: |
         bind: 0.0.0.0:25577
     volumes:
-      - ${BASE_PATH}/velocity/plugins:/plugins
-      - ${BASE_PATH}/velocity/config:/config
-      - velocity_data:/data
+      - ${BASE_PATH}/velocity/plugins:/server/plugins
+      - ${BASE_PATH}/velocity/config:/server/config
+      - velocity_data:/server
+    tty: true
+    stdin_open: true
 
   minecraft1:
     container_name: rustyconnector_mc1
@@ -30,6 +29,8 @@ services:
       - ${BASE_PATH}/mc1/mods:/data/mods
       - ${BASE_PATH}/mc1/config:/data/config
       - mc1_data:/data
+    tty: true
+    stdin_open: true
 
   minecraft2:
     container_name: rustyconnector_mc2
@@ -47,6 +48,8 @@ services:
       - ${BASE_PATH}/mc2/mods:/data/mods
       - ${BASE_PATH}/mc2/config:/data/config
       - mc2_data:/data
+    tty: true
+    stdin_open: true
 
   minecraft3:
     container_name: rustyconnector_mc3
@@ -64,10 +67,8 @@ services:
       - ${BASE_PATH}/mc3/mods:/data/mods
       - ${BASE_PATH}/mc3/config:/data/config
       - mc3_data:/data
-
-  #
-  # Below here are some common tools people might like to use for module development
-  #
+    tty: true
+    stdin_open: true
 
   redis:
     container_name: rustyconnector_redis
@@ -77,6 +78,8 @@ services:
     volumes:
       - ${BASE_PATH}/redis/config:/usr/local/etc/redis
       - redis_data:/data
+    tty: true
+    stdin_open: true
 
   postgres:
     container_name: rustyconnector_postgres
@@ -90,6 +93,8 @@ services:
     volumes:
       - ${BASE_PATH}/postgres/config:/etc/postgresql
       - postgres_data:/var/lib/postgresql/data
+    tty: true
+    stdin_open: true
 
   mongodb:
     container_name: rustyconnector_mongodb
@@ -103,6 +108,8 @@ services:
     volumes:
       - ${BASE_PATH}/mongodb/config:/etc/mongo
       - mongodb_data:/data/db
+    tty: true
+    stdin_open: true
 
   mariadb:
     container_name: rustyconnector_mariadb
@@ -117,6 +124,8 @@ services:
     volumes:
       - ${BASE_PATH}/mariadb/config:/etc/mysql/conf.d
       - mariadb_data:/var/lib/mysql
+    tty: true
+    stdin_open: true
 
 volumes:
   velocity_data:
