@@ -6,6 +6,6 @@ This is a little Docker based env to bootstrap and test RustyConnector quickly f
 1. Install Docker
 2. Clone the repo and modify the .env to whatever spec you require
 3. from inside the repo run `docker compose up -d`
-4. It'll automatically create a preloaded RC swarm with one proxy and 3 downstream MC servers, included is MongoDB, PostgresDB, MariaDB, and Redis all on default ports for the purposes of module development, check .env for default login details. 
+4. It'll automatically create a preloaded RC swarm with one proxy and 3 downstream MC servers, included is MongoDB, PostgresDB, MariaDB, and Redis all on default ports for the purposes of module development, these come commented out for the sake of resource management.
 
 The Compose will drop all files inside the repo for ease of use, so for the proxy that'll be `./rustyconnector/velocity/config`
