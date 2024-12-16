@@ -53,5 +53,5 @@
 version: 7
 
 ## The name of the root family which all players initially connecting to the network will join into.#
-root-family: "lobby"
+root-family: "dev1"
 

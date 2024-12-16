@@ -1,7 +1,15 @@
-./rustyconnector/mc1
-./rustyconnector/mc2
-./rustyconnector/mc3
-./rustyconnector/mariadb/*
-./rustyconnector/mongodb/*
-./rustyconnector/postgresdb/*
-./rustyconnector/redis
+# Ignore all files
+*
+# Whitelist all files in the repo root
+!*.*
+!*/
+
+
+# Blacklist everything in ./rustyconnector
+!/rustyconnector/
+/rustyconnector/*
+
+# Whitelist specifically the contents of the minecraft folders while ignoring everything else
+!/rustyconnector/mc1/**
+!/rustyconnector/mc2/**
+!/rustyconnector/mc3/**

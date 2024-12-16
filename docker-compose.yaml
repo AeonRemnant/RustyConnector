@@ -3,18 +3,17 @@ services:
     container_name: rustyconnector_velocity
     image: itzg/bungeecord
     ports:
-      - 25577:25577
+      - 25565:25565
     environment:
       TYPE: VELOCITY
       VELOCITY_VERSION: ${PROXY_VERSION}
       VELOCITY_CONFIG: |
-        bind: 0.0.0.0:25577
-      # UID: 1000
-      # GID: 1000
-      # UMASK: "002"
+        bind: 0.0.0.0:25565
     volumes:
       - ${BASE_PATH}/velocity/plugins:/server/plugins
       - ${BASE_PATH}/velocity/config:/server/config
+      - ${BASE_PATH}/velocity/velocity.toml:/server/velocity.toml
+      - ${BASE_PATH}/velocity/forwarding.secret:/server/forwarding.secret
       - velocity_data:/server
     tty: true
     stdin_open: true
@@ -27,9 +26,7 @@ services:
       TYPE: ${MC_TYPE}
       MEMORY: ${RAM}
       USE_AIKAR_FLAGS: ${FLAGS}
-      # UID: 1000
-      # GID: 1000
-      # UMASK: "002"
+      ONLINE_MODE: ${ONLINE_MODE}
     volumes:
       - ${BASE_PATH}/mc1/plugins:/data/plugins
       - ${BASE_PATH}/mc1/mods:/data/mods
@@ -46,9 +43,7 @@ services:
       TYPE: ${MC_TYPE}
       MEMORY: ${RAM}
       USE_AIKAR_FLAGS: ${FLAGS}
-      UID: 1000
-      GID: 1000
-      UMASK: "002"
+      ONLINE_MODE: ${ONLINE_MODE}
     volumes:
       - ${BASE_PATH}/mc2/plugins:/data/plugins
       - ${BASE_PATH}/mc2/mods:/data/mods
@@ -65,9 +60,7 @@ services:
       TYPE: ${MC_TYPE}
       MEMORY: ${RAM}
       USE_AIKAR_FLAGS: ${FLAGS}
-      UID: 1000
-      GID: 1000
-      UMASK: "002"
+      ONLINE_MODE: ${ONLINE_MODE}
     volumes:
       - ${BASE_PATH}/mc3/plugins:/data/plugins
       - ${BASE_PATH}/mc3/mods:/data/mods

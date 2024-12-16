@@ -22,7 +22,7 @@ address: "minecraft3:25565"
 # Every server must be a member of a family.
 # If the server tries to register into a family that doesn't exist, the server won't register.
 #
-family: "dev"
+family: "dev3"
 
 magic-link:
     #
