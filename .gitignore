@@ -1,15 +1,10 @@
-# Ignore all files
-*
-# Whitelist all files in the repo root
-!*.*
-!*/
+# Blacklist specific annoying directories within minecraft, there's probably a smart regex way to do this that isn't multiline, I'll figure it out later.
+/rustyconnector/mc*/plugins/.paper-remapped
+/rustyconnector/mc*/plugins/bStats
+/rustyconnector/mc*/plugins/spark
 
-
-# Blacklist everything in ./rustyconnector
-!/rustyconnector/
-/rustyconnector/*
-
-# Whitelist specifically the contents of the minecraft folders while ignoring everything else
-!/rustyconnector/mc1/**
-!/rustyconnector/mc2/**
-!/rustyconnector/mc3/**
+# Blacklist service folders
+/rustyconnector/mariadb
+/rustyconnector/mongodb
+/rustyconnector/postgres
+/rustyconnector/redis
